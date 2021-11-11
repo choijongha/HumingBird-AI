@@ -227,6 +227,26 @@ public class HummingbirdAgent : Agent
         actionsOut[3] = pitch;
         actionsOut[4] = yaw;
     }
+    
+    /// <summary>
+    /// Prevent the agent from moving and taking actions
+    /// </summary>
+    public void FreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
+        frozen = true;
+        rigidbody.Sleep();
+    }
+
+    /// <summary>
+    /// Resume agent movement and actions
+    /// </summary>
+    public void UnfreezeAgent()
+    {
+        Debug.Assert(trainingMode == false, "Freeze/Unfreeze not supported in training");
+        frozen = false;
+        rigidbody.WakeUp();
+    }
 
     /// <summary>
     /// Move the agent to a safe random position (i.e. does not collide with anything)
